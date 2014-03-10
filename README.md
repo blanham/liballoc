@@ -1,5 +1,9 @@
+This is liballoc, a memory allocator for hobby operating systems, originally
+written by Durand. According to the original page for liballoc it was released
+into the public domain, but the copy I have contains the 3 clause BSD license.
 
-
+liballoc.c/h are the original release of liballoc taken from the spoon tarball
+while liballoc_1_1.c/h are later versions found by detective work using Google.
 
 There are 4 functions which you need to implement on your system:
 
