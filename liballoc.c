@@ -363,7 +363,7 @@ void *malloc(size_t size)
 
 				struct boundary_tag *new_tag = split_tag( tag ); 
 
-				new_tag = new_tag;	// Get around the compiler warning about unused variables.
+				(void)new_tag;	// Get around the compiler warning about unused variables.
 	
 				#ifdef DEBUG
 				printf("Old tag has become %i bytes, new tag is now %i bytes (%i exp)\n", tag->real_size, new_tag->real_size, new_tag->index );
@@ -516,10 +516,10 @@ void*   realloc(void *p, size_t size)
 	}
 	if ( p == NULL ) return malloc( size );
 
-	if ( liballoc_lock != NULL ) liballoc_lock();		// lockit
-		tag = (struct boundary_tag*)((unsigned int)p - sizeof( struct boundary_tag ));
+	liballoc_lock();		// lockit
+		tag = (struct boundary_tag*)(p - sizeof( struct boundary_tag ));
 		real_size = tag->size;
-	if ( liballoc_unlock != NULL ) liballoc_unlock();
+	liballoc_unlock();
 
 	if ( real_size > size ) real_size = size;
 
